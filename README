@@ -1,0 +1,141 @@
+COMP 15 HW 4: Tree-Mendous Alphabetizer
+By Rebecca Redelmeier
+Date: October 26, 2016
+
+PURPOSE
+The purpose of this program is to Alphabetize a list of strings in either
+forward or reverse order using a Binary Search Tree. The Alphabetizer
+allows strings to be passed in either through a file name or cin.
+
+ACKNOWLEDGEMENTS
+Piazza and StackOverflow.com used as a reference. Other function-specific 
+sources included directly in code.
+
+FILES PROVIDED
+        StringBST.h
+        Header file for StringBST class. Includes functions to build a BST
+        of strings and manipulate the tree through removal, addition, etc.
+
+        StringBST.cpp
+        Implementation of StringBST class.
+
+        Alphabetizer.h
+        Header file for Alphabetizer class. Reads in strings from file or from
+        cin and then prints them in either forward or reverse order to the
+        user. Creates a StringBST of the strings.
+
+        Alphabetizer.cpp
+        Implementation of the StringBST class.
+
+        main.cpp
+        Checks for proper amount of command line arguments, builds Alphabetizer
+        class and then calls appropriate run() function of the 
+        Alphabetizer class depending on command line arguments. 
+
+        BSTTesting.cpp
+        Test functions for the StringBST class. 
+
+        AlphaTesting.cpp
+        Test functions for the Alphabetizer class. (Very similar to main.cpp)
+        
+CLASSES & CONNECTIONS
+1. main() function creates Alphabetizer instance
+2. Alphabetizer creates StringBST instance.
+
+COMPILING & RUNNING
+    ENTIRE PROGRAM:
+    compile line:
+    clang++ -Wall -std=c++11 main.cpp StringBST.cpp Alphabetizer.cpp -o \
+    
+    To run type "./alpha". This can be followed by command line arguments to
+    indicate that strings should be read from a file. 
+    Command line arguments that are expected, in this order, are:
+        1. "f" or "r" to indicate forward or reverse alphabetizing
+        2. file name 
+    
+    If no command line arguments are provided, the program will assume that
+    strings will be provided through cin. To do this, first input either 
+    "f" or "r" to indicate forward or reverse alphabetizing, followed by
+    the strings.
+
+    TEST FILES
+        BSTTesting.cpp
+        compile line: clang++ -Wall -Wextra -std=c++11 BSTTesting.cpp 
+                StringBST.cpp
+        executable can be run through ./a.out
+
+        AlphaTesting.cpp
+        compile line (all in one line):
+        clang++ -Wall -Wextra -std=c++11 AlphaTesting.cpp Alphabetizer.cpp 
+                StringBST.cpp
+
+    executable can be run through ./a.out. requires same command line argument
+    or cin as compiling the entrire program.
+
+DATA STRUCTURES
+        Binary Search Tree
+        A binary search tree is implemented in this program through the
+        StringBST class. A tree is a structure created through Nodes and
+        Node pointers. Each Node has a left and right pointer that can
+        point to another Node or NULL. The Nodes that each Node points
+        to are its children; the left child is of smaller value and the
+        right child is of a larger value than it. Using a binary search
+        tree is appropriate as it makes the process of alphabetizing
+        strings much more efficient. For example, to find the word of least
+        value, one does not have to touch every node but only the nodes
+        on the left most side of the tree.    
+
+        Classes
+        There are two classes in this program: StringBST and Alphabetizer.
+        Classes hold private and public data members as well as functions. 
+        Through utilizing a pointer to a class or creating an instance of 
+        the class, a different class can use the functions and data members 
+        in the first class. This is an appropriate data structure as it allows 
+        for modularity as classes can be used multiple times and called from 
+        different places. As well, classes break down the program into smaller 
+        peices. 
+
+        Structs
+        One struct, Node, is used in this program. Structs are data types that
+        are defined as holding any number of other data types. Struct is an 
+        appropriate data structure for Order as it allows all the data that
+        is relevant to Node, such as the string and the int times_addes to
+        be stored in one spot.
+
+ALGORITHIMS
+        clear() in StringBST
+        Recursively deletes the smallest Node in the tree until all Nodes are
+        deleted.
+
+        print() in StringBST
+        Prints each subtree of the StringBST as a possibly-empty left node, 
+        followed by the current node, followed by a possibly empty rigt node,
+        all in square brackets []. This algorithm applies to the entire tree,
+        thus allowing the tree to be printed with an understanding of what is 
+        linked to what.
+
+        add() in StringBSt
+        Iterates through tree to find a left leaf that is smaller than the 
+        string to be added. One found, a new node is created with the data and
+        is connected to the parent node that has been found.
+
+        remove() in StringBST
+        Iterates through tree to find the node needing to be removed. If it is
+        a leaf, the node is deleted and the parent node pointer to it is set
+        to NULL. If it has one child, the parent node pointer to it is set to
+        point to its child. If it has two children, the next smallest node in 
+        it right subtree is found, saved, and then deleted. Once it has been
+        deleted, the saved data is copied int the node with the data needing
+        to be removed.
+
+        parent(TreeNode *, string) in StringBST
+        Finds the parent of a passed in string. Does this through recursively
+        iterating through tree and finding the node that has either a left
+        or right poiter that points to the string.
+
+        print(string) in Alphabetizer
+        Prints the nodes in the StringBST in either min-first or max-first
+        order. does so by getting min or max and then removing until 
+        tree is empty.
+        
+
